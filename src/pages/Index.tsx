@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import confetti from "canvas-confetti";
 import { Crown, Sparkles, MapPin, Calendar, Clock } from "lucide-react";
 import castleBackground from "@/assets/castle-background.jpg";
 import castleDreamy from "@/assets/castle-dreamy.jpg";
 
 const Index = () => {
-  const [currentSection, setCurrentSection] = useState(0);
+  const [revealedSections, setRevealedSections] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
   
   // Update these details as needed
   const invitationDetails = {
@@ -18,11 +19,11 @@ const Index = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (currentSection < 5) {
-        setCurrentSection(currentSection + 1);
+      if (revealedSections < 6) {
+        setRevealedSections(revealedSections + 1);
         
         // Trigger confetti on name reveal (section 1)
-        if (currentSection === 0) {
+        if (revealedSections === 2) {
           const duration = 3000;
           const animationEnd = Date.now() + duration;
           const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
@@ -54,11 +55,19 @@ const Index = () => {
             });
           }, 250);
         }
+        
+        // Auto-scroll to new section
+        setTimeout(() => {
+          scrollRef.current?.scrollTo({
+            top: scrollRef.current.scrollHeight,
+            behavior: 'smooth'
+          });
+        }, 100);
       }
-    }, currentSection === 0 ? 2500 : 2000);
+    }, revealedSections === 0 ? 2500 : 2000);
 
     return () => clearTimeout(timer);
-  }, [currentSection]);
+  }, [revealedSections]);
 
   const sections = [
     {
@@ -116,71 +125,103 @@ const Index = () => {
     },
   ];
 
-  const currentSectionData = sections[currentSection];
-
   return (
     <div className="relative min-h-screen overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div 
-        className="fixed inset-0 bg-cover bg-center transition-all duration-1000"
-        style={{
-          backgroundImage: `url(${currentSectionData.background})`,
-        }}
-      />
-      <div className="fixed inset-0 bg-gradient-to-b from-princess-pink/40 via-princess-lilac/30 to-princess-light/50" />
+      {/* Parallax Background Images */}
+      <div className="fixed inset-0">
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${castleDreamy})`,
+            backgroundAttachment: 'fixed',
+            transform: 'translateZ(0)',
+          }}
+        />
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-1000"
+          style={{
+            backgroundImage: `url(${castleBackground})`,
+            backgroundAttachment: 'fixed',
+            transform: 'translateZ(0)',
+            opacity: revealedSections > 2 ? 0.6 : 0,
+          }}
+        />
+      </div>
+      <div className="fixed inset-0 bg-gradient-to-b from-princess-pink/30 via-princess-lilac/20 to-princess-light/40" />
       
       {/* Content */}
-      <div className="relative z-10 flex min-h-screen items-center justify-center p-4">
-        <div className="text-center animate-fade-in">
-          {/* Icon */}
-          {currentSectionData.icon && (
-            <div className="mb-6 flex justify-center">
-              {currentSectionData.icon}
+      <div 
+        ref={scrollRef}
+        className="relative z-10 overflow-y-auto h-screen scroll-smooth"
+      >
+        <div className="min-h-screen flex flex-col items-center justify-center space-y-24 py-20 px-4">
+          {sections.slice(0, revealedSections).map((section, index) => (
+            <div
+              key={index}
+              className="text-center animate-fade-in w-full max-w-4xl"
+              style={{
+                animationDelay: `${index * 0.2}s`,
+              }}
+            >
+              {/* Icon */}
+              {section.icon && (
+                <div className="mb-6 flex justify-center drop-shadow-lg">
+                  {section.icon}
+                </div>
+              )}
+              
+              {/* Title */}
+              <h1 
+                className={`mb-6 font-bold tracking-wide drop-shadow-lg ${
+                  section.isNameReveal 
+                    ? 'text-6xl md:text-8xl' 
+                    : 'text-4xl md:text-6xl'
+                }`}
+                style={{
+                  fontFamily: "'Cinzel Decorative', serif",
+                  color: 'hsl(var(--princess-gold))',
+                  textShadow: '3px 3px 6px rgba(0,0,0,0.4), 0 0 30px rgba(255,215,0,0.5), 0 0 10px rgba(0,0,0,0.8)',
+                }}
+              >
+                {section.title}
+              </h1>
+              
+              {/* Content */}
+              <div 
+                className="text-2xl md:text-3xl font-semibold drop-shadow-md"
+                style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  color: '#1a1a1a',
+                  textShadow: '2px 2px 4px rgba(255,255,255,0.8), 1px 1px 2px rgba(255,255,255,0.9)',
+                }}
+              >
+                {section.content}
+              </div>
+
+              {/* Separator */}
+              {index < revealedSections - 1 && (
+                <div className="mt-12 flex justify-center">
+                  <Sparkles className="w-8 h-8 text-princess-gold opacity-60 animate-sparkle" />
+                </div>
+              )}
             </div>
-          )}
-          
-          {/* Title */}
-          <h1 
-            className={`mb-6 font-bold tracking-wide ${
-              currentSectionData.isNameReveal 
-                ? 'text-6xl md:text-8xl' 
-                : 'text-4xl md:text-6xl'
-            }`}
-            style={{
-              fontFamily: "'Cinzel Decorative', serif",
-              color: 'hsl(var(--princess-gold))',
-              textShadow: '2px 2px 4px rgba(0,0,0,0.2), 0 0 20px rgba(255,215,0,0.3)',
-            }}
-          >
-            {currentSectionData.title}
-          </h1>
-          
-          {/* Content */}
-          <div 
-            className="text-2xl md:text-3xl font-semibold"
-            style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              color: 'hsl(var(--foreground))',
-            }}
-          >
-            {currentSectionData.content}
-          </div>
+          ))}
 
           {/* Progress Dots */}
-          <div className="mt-12 flex justify-center gap-2">
-            {sections.map((_, index) => (
-              <div
-                key={index}
-                className={`h-2 w-2 rounded-full transition-all duration-500 ${
-                  index === currentSection
-                    ? 'bg-princess-gold w-8'
-                    : index < currentSection
-                    ? 'bg-primary/60'
-                    : 'bg-muted'
-                }`}
-              />
-            ))}
-          </div>
+          {revealedSections > 0 && (
+            <div className="flex justify-center gap-2 pb-8">
+              {sections.map((_, index) => (
+                <div
+                  key={index}
+                  className={`h-2 w-2 rounded-full transition-all duration-500 ${
+                    index < revealedSections
+                      ? 'bg-princess-gold w-8'
+                      : 'bg-muted/50'
+                  }`}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
 

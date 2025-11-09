@@ -21,13 +21,15 @@ export const metadata = {
 📍 Venue: ${invitationDetails.venue}
 Join us for a magical royal celebration!`,
     type: "website",
-    image: "https://lovable.dev/opengraph-image-p98pqg.png",
+    image: "/og-image.png", // Will be resolved to full URL at runtime
+    imageAlt: "Princess birthday celebration with magical cake",
   },
   
   // Twitter metadata
   twitter: {
     card: "summary_large_image",
     site: "1st Birthday Invitation",
-    image: "https://lovable.dev/opengraph-image-p98pqg.png",
+    image: "/og-image.png", // Will be resolved to full URL at runtime
+    imageAlt: "Princess birthday celebration with magical cake",
   },
 };

@@ -513,7 +513,7 @@ const Index = () => {
       {/* Content - z-index: 40 */}
       <div className="relative z-40">
         {/* Hero Section - Name Reveal */}
-        <section className="relative min-h-screen flex items-center justify-center px-4">
+        <section className="relative min-h-[100dvh] flex items-center justify-center px-4">
           <div className="text-center animate-fade-in max-w-4xl">
             <div className="relative inline-block mb-10 sm:mb-12 md:mb-14">
               <div 
@@ -608,7 +608,7 @@ const Index = () => {
         </section>
 
         {/* Details Section */}
-        <section ref={detailsSectionRef} className="min-h-screen flex items-center justify-center px-4 py-20">
+        <section ref={detailsSectionRef} className="min-h-screen min-h-[100dvh] flex items-center justify-center px-4 py-20">
           <div className="max-w-4xl w-full space-y-16">
             {/* When Card */}
             <div className="bg-white/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl border-3 sm:border-4 border-yellow-400 animate-fade-in">

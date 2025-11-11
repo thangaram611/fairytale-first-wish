@@ -19,7 +19,7 @@ const CloudLayers = ({ scrollY }: CloudLayersProps) => {
     <>
       {/* Cloud layer 1 - Slow moving, top left */}
       <div 
-        className="fixed inset-0 overflow-hidden z-10 pointer-events-none"
+        className="fixed min-h-[100dvh] inset-0 overflow-hidden z-10 pointer-events-none"
         style={{
           transform: `translateY(${scrollY * 0.2}px)`,
           willChange: 'transform',
@@ -50,7 +50,7 @@ const CloudLayers = ({ scrollY }: CloudLayersProps) => {
 
       {/* Cloud layer 2 - Medium speed, middle */}
       <div 
-        className="fixed inset-0 overflow-hidden z-11 pointer-events-none"
+        className="fixed min-h-[100dvh] inset-0 overflow-hidden z-11 pointer-events-none"
         style={{
           transform: `translateY(${scrollY * 0.35}px)`,
           willChange: 'transform',
@@ -88,7 +88,7 @@ const CloudLayers = ({ scrollY }: CloudLayersProps) => {
 
       {/* Cloud layer 3 - Faster, bottom */}
       <div 
-        className="fixed inset-0 overflow-hidden z-12 pointer-events-none"
+        className="fixed min-h-[100dvh] inset-0 overflow-hidden z-12 pointer-events-none"
         style={{
           transform: `translateY(${scrollY * 0.5}px)`,
           willChange: 'transform',
@@ -119,7 +119,7 @@ const CloudLayers = ({ scrollY }: CloudLayersProps) => {
 
       {/* Cloud layer 4 - Very slow, far background - hidden on mobile */}
       <div 
-        className="hidden md:block fixed inset-0 overflow-hidden z-13 pointer-events-none"
+        className="hidden md:block fixed min-h-[100dvh] inset-0 overflow-hidden z-13 pointer-events-none"
         style={{
           transform: `translateY(${scrollY * 0.15}px)`,
           willChange: 'transform',
@@ -150,7 +150,7 @@ const CloudLayers = ({ scrollY }: CloudLayersProps) => {
 
       {/* Cloud layer 5 - In front of castle, slow parallax */}
       <div 
-        className="fixed inset-0 overflow-hidden z-25 pointer-events-none"
+        className="fixed min-h-[100dvh] inset-0 overflow-hidden z-25 pointer-events-none"
         style={{
           transform: `translateY(${scrollY * 0.4}px)`,
           willChange: 'transform',

@@ -1,6 +1,6 @@
 const LoadingScreen = () => {
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-b from-pink-100 via-pink-200 to-purple-200">
+    <div className="fixed min-h-[100dvh] inset-0 z-[100] flex items-center justify-center bg-gradient-to-b from-pink-100 via-pink-200 to-purple-200">
       <div className="text-center space-y-8">
         {/* Simple Crown */}
         <div className="text-6xl sm:text-7xl md:text-8xl">

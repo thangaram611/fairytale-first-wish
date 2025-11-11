@@ -10,7 +10,7 @@ function injectMetaTags(): Plugin {
     transformIndexHtml(html) {
       // Get the base URL for production (can be configured)
       const baseUrl = process.env.VITE_BASE_URL || "https://taneira1.onslate.in";
-      const ogImageUrl = `${baseUrl}/og-image.png`;
+      const ogImageUrl = `${baseUrl}/og-image.jpg`;
       
       return html
         .replaceAll(/__META_TITLE__/g, metadata.title)

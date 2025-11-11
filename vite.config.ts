@@ -9,7 +9,7 @@ function injectMetaTags(): Plugin {
     name: "inject-meta-tags",
     transformIndexHtml(html) {
       // Get the base URL for production (can be configured)
-      const baseUrl = process.env.VITE_BASE_URL || "https://fairytale-first-wish-xknektmp.onslate.in";
+      const baseUrl = process.env.VITE_BASE_URL || "https://taneira1.onslate.in";
       const ogImageUrl = `${baseUrl}/og-image.png`;
       
       return html

@@ -156,7 +156,7 @@ const DetailsSection = forwardRef<HTMLDivElement>((props, ref) => {
               <div className="flex items-center gap-2 sm:gap-3 bg-pink-200/60 px-3 sm:px-6 py-3 sm:py-4 rounded-full border-2 border-pink-300 shadow-lg">
                 <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-pink-300 border-2 border-pink-400 shadow-inner flex-shrink-0"></div>
                 <span className="text-base sm:text-xl font-semibold whitespace-nowrap" style={{ color: '#E91E8C' }}>
-                  Light Pink
+                  Pink
                 </span>
               </div>
               <span className="text-2xl sm:text-3xl font-bold flex-shrink-0" style={{ color: '#D4AF37' }}>

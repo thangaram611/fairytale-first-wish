@@ -32,30 +32,11 @@ const HeroSection = ({ onDetailsClick }: HeroSectionProps) => {
             stiffness: 100
           }}
         >
-          <motion.div 
-            className="absolute -inset-12"
-            style={{
-              background: 'radial-gradient(circle, rgba(255,215,0,0.3) 0%, rgba(255,215,0,0.2) 30%, rgba(255,215,0,0.1) 60%, transparent 100%)',
-              filter: 'blur(20px)',
-            }}
-            animate={{ 
-              scale: [1, 1.2, 1],
-              opacity: [0.5, 0.8, 0.5]
-            }}
-            transition={{ 
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
           <Picture 
             avifSrc={crownAvif}
             webpSrc={crownWebp}
             alt="Crown" 
             className="relative w-32 h-32 mx-auto object-contain"
-            style={{
-              filter: 'drop-shadow(0 0 10px rgba(255,215,0,0.2))'
-            }}
           />
         </motion.div>
         
@@ -78,13 +59,13 @@ const HeroSection = ({ onDetailsClick }: HeroSectionProps) => {
           style={{
             fontFamily: "'Cormorant Garamond', serif",
             color: '#FFF',
-            textShadow: '3px 3px 6px rgba(0,0,0,0.7)',
+            textShadow: '2px 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.6), 1px 1px 2px rgba(0,0,0,1)',
           }}
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.7 }}
         >
-          is turning ONE!
+          is to be crowned ONE!
         </motion.p>
         
         <motion.div 
@@ -98,10 +79,10 @@ const HeroSection = ({ onDetailsClick }: HeroSectionProps) => {
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               color: '#FFF',
-              textShadow: '2px 2px 4px rgba(0,0,0,0.7)',
+              textShadow: '2px 2px 6px rgba(0,0,0,0.9), 0 0 15px rgba(0,0,0,0.5), 1px 1px 2px rgba(0,0,0,1)',
             }}
           >
-            {invitationDetails.age} Birthday Celebration
+            Join us for the royal celebration!
           </p>
         </motion.div>
       </motion.div>

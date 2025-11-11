@@ -21,15 +21,15 @@ export const metadata = {
 📍 Venue: ${invitationDetails.venue}
 Join us for a magical royal celebration!`,
     type: "website",
-    image: "/og-image.png", // Will be resolved to full URL at runtime
-    imageAlt: "Princess birthday celebration with magical cake",
+    image: "/og-image.jpg", // Will be resolved to full URL at runtime
+    imageAlt: "Taneira birthday celebration",
   },
   
   // Twitter metadata
   twitter: {
     card: "summary_large_image",
     site: "1st Birthday Invitation",
-    image: "/og-image.png", // Will be resolved to full URL at runtime
-    imageAlt: "Princess birthday celebration with magical cake",
+    image: "/og-image.jpg", // Will be resolved to full URL at runtime
+    imageAlt: "Taneira birthday celebration",
   },
 };

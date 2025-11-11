@@ -1,7 +1,7 @@
 import { defineConfig, Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-import { invitationDetails, metadata } from "./src/config/metadata";
+import { metadata } from "./src/config/metadata";
 
 // Plugin to inject meta tags at build time
 function injectMetaTags(): Plugin {

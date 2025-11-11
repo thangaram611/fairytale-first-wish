@@ -6,15 +6,12 @@ const ConfettiEffect = () => {
     // Initial confetti burst on page load
     const duration = 3000;
     const animationEnd = Date.now() + duration;
-    const screenWidth = window.innerWidth;
-    const isMobileDevice = screenWidth <= 768;
-    const scalarSize = screenWidth < 768 ? 0.8 : screenWidth < 1024 ? 1.2 : screenWidth < 1440 ? 1.5 : 1.8;
     const defaults = { 
-      startVelocity: isMobileDevice ? 25 : 30, 
-      spread: isMobileDevice ? 100 : 120, 
+      startVelocity: 25, 
+      spread: 100, 
       ticks: 60, 
       zIndex: 0, 
-      scalar: scalarSize 
+      scalar: 0.8 
     };
 
     function randomInRange(min: number, max: number) {
@@ -34,7 +31,7 @@ const ConfettiEffect = () => {
       }
 
       if (currentTime - lastTime >= intervalTime) {
-        const particleCount = isMobileDevice ? 15 * (timeLeft / duration) : 25 * (timeLeft / duration);
+        const particleCount = 15 * (timeLeft / duration);
         
         confetti({
           ...defaults,
@@ -72,11 +69,9 @@ const ConfettiEffect = () => {
 
   useEffect(() => {
     // Rocket fireworks that launch after initial confetti
-    const screenWidth = window.innerWidth;
-    const isMobileDevice = screenWidth <= 768;
     const rocketDelay = setTimeout(() => {
       const launchTwoRockets = () => {
-        const rocketCount = isMobileDevice ? 1 : 2;
+        const rocketCount = 2;
         for (let i = 0; i < rocketCount; i++) {
           const originX = Math.random() * 0.6 + 0.2;
           const colors = [
@@ -129,16 +124,13 @@ const ConfettiEffect = () => {
             frame();
 
             setTimeout(() => {
-              const screenWidth = window.innerWidth;
-              const explosionScalar = screenWidth < 768 ? 0.9 : screenWidth < 1024 ? 1.3 : screenWidth < 1440 ? 1.6 : 2.0;
-              
               confetti({
                 particleCount: 80,
                 angle: 90,
                 spread: 360,
-                startVelocity: isMobileDevice ? 30 : 45,
+                startVelocity: 30,
                 decay: 0.91,
-                scalar: explosionScalar,
+                scalar: 0.9,
                 origin: { x: finalX, y: finalY },
                 colors: rocketColors,
                 zIndex: 0,
@@ -146,24 +138,6 @@ const ConfettiEffect = () => {
                 drift: 0,
                 ticks: 200
               });
-              
-              if (!isMobileDevice) {
-                setTimeout(() => {
-                  confetti({
-                    particleCount: 50,
-                    angle: 90,
-                    spread: 360,
-                    startVelocity: 30,
-                    decay: 0.94,
-                    scalar: explosionScalar * 0.7,
-                    origin: { x: finalX, y: finalY },
-                    colors: rocketColors,
-                    zIndex: 0,
-                    gravity: 1.2,
-                    ticks: 150
-                  });
-                }, 200);
-              }
             }, duration);
           }, launchDelay);
         }
@@ -172,7 +146,7 @@ const ConfettiEffect = () => {
       launchTwoRockets();
       setTimeout(launchTwoRockets, 2000 + Math.random() * 1000);
       setTimeout(launchTwoRockets, 4500 + Math.random() * 1000);
-    }, isMobileDevice ? 2500 : 3500);
+    }, 2500);
 
     return () => clearTimeout(rocketDelay);
   }, []);

@@ -8,21 +8,25 @@ export const invitationDetails = {
 };
 
 export const metadata = {
-  title: "Birthday Invitation - Join Our Magical Celebration! 👑",
-  description: "You're invited to a magical princess celebration! Date: " + invitationDetails.date + " | Time: " + invitationDetails.time + " | Venue: " + invitationDetails.venue + ". Join us for a royal first birthday party!",
+  title: "👑 Princess Taneira's 1st Birthday - Join Our Magical Celebration!",
+  description: "You're invited to a magical princess celebration! 🎂 Date: " + invitationDetails.date + " | ⏰ Time: " + invitationDetails.time + " | 📍 Venue: " + invitationDetails.venue + ". Join us for a royal first birthday party filled with joy and wonder!",
   author: "Taneira's Family",
   
-  // Open Graph metadata
+  // Open Graph metadata - optimized for WhatsApp sharing
   og: {
-    title: "👑 Princess Taneira First Birthday Party Invitation",
-    description: `🎂 Celebrating ${invitationDetails.age} Birthday
+    title: "👑 Princess Taneira's First Birthday Celebration!",
+    description: `🎂 Celebrating 1st Birthday!
+
 📅 Date: ${invitationDetails.date}
 🕐 Time: ${invitationDetails.time}
 📍 Venue: ${invitationDetails.venue}
-Join us for a magical royal celebration!`,
+
+👗 Dress Code: Light Pink or Lilac
+
+Join us for a magical royal celebration! ✨`,
     type: "website",
     image: "/og-image.jpg", // Will be resolved to full URL at runtime
-    imageAlt: "Taneira birthday celebration",
+    imageAlt: "Princess Taneira's magical first birthday celebration invitation",
   },
   
   // Twitter metadata
@@ -30,6 +34,6 @@ Join us for a magical royal celebration!`,
     card: "summary_large_image",
     site: "1st Birthday Invitation",
     image: "/og-image.jpg", // Will be resolved to full URL at runtime
-    imageAlt: "Taneira birthday celebration",
+    imageAlt: "Princess Taneira's magical first birthday celebration invitation",
   },
 };

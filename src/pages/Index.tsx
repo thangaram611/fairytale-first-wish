@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { AnimatePresence } from "framer-motion";
 import LoadingScreen from "@/components/LoadingScreen";
 import ConfettiEffect from "@/components/ConfettiEffect";
 import CloudLayers from "@/components/CloudLayers";
@@ -68,72 +69,79 @@ const Index = () => {
     loadImages();
   }, []);
 
+  // Optimized scroll handler with requestAnimationFrame
   useEffect(() => {
-    let ticking = false;
+    let rafId: number;
     
     const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setScrollY(window.scrollY);
-          ticking = false;
-        });
-        ticking = true;
+      if (rafId) {
+        cancelAnimationFrame(rafId);
       }
+      
+      rafId = requestAnimationFrame(() => {
+        setScrollY(window.scrollY);
+      });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     
     return () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  // Loading screen
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
-
   return (
-    <div className="relative min-h-[100dvh] overflow-x-hidden" style={{ touchAction: 'pan-y' }}>
-      {/* Confetti Effects */}
-      <ConfettiEffect />
+    <>
+      <AnimatePresence>
+        {isLoading && <LoadingScreen />}
+      </AnimatePresence>
 
-      {/* Base gradient background - baby pink to lilac - z-index: 0 */}
-      <div className="fixed min-h-[100dvh] inset-0 bg-gradient-to-b from-pink-100 via-pink-200 to-purple-200 z-0" />
-      
-      {/* Cloud layers with parallax effect */}
-      <CloudLayers scrollY={scrollY} />
-      
-      {/* Castle layer */}
-      <CastleLayer scrollY={scrollY} />
-      
-      {/* Gradient overlay for depth - z-index: 30 */}
-      <div className="fixed min-h-[100dvh] inset-0 bg-gradient-to-b from-transparent via-purple-300/40 to-purple-500/80 pointer-events-none z-30" />
-      
-      {/* Content - z-index: 40 */}
-      <div className="relative z-40">
-        {/* Hero Section - Name Reveal */}
-        <HeroSection onDetailsClick={scrollToDetails} />
+      {!isLoading && (
+        <div className="relative overflow-x-hidden" style={{ touchAction: 'pan-y' }}>
+          {/* Confetti Effects */}
+          <ConfettiEffect />
 
-        {/* Details Section */}
-        <DetailsSection ref={detailsSectionRef} />
+          {/* Base gradient background - baby pink to lilac - z-index: 0 */}
+          <div className="fixed inset-0 bg-gradient-to-b from-pink-100 via-pink-200 to-purple-200 z-0" />
+          
+          {/* Cloud layers with parallax effect */}
+          <CloudLayers scrollY={scrollY} />
+          
+          {/* Castle layer */}
+          <CastleLayer scrollY={scrollY} />
+          
+          {/* Gradient overlay for depth - z-index: 30 */}
+          <div className="fixed inset-0 bg-gradient-to-b from-transparent via-purple-300/40 to-purple-500/80 pointer-events-none z-30" />
+          
+          {/* Content - z-index: 40 */}
+          <div className="relative z-40">
+            {/* Hero Section - Name Reveal */}
+            <HeroSection onDetailsClick={scrollToDetails} />
 
-        {/* Made with Love Section - At the very bottom */}
-        <section className="relative py-8 text-center">
-          <p 
-            className="text-sm md:text-base font-medium"
-            style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              color: '#FFF',
-              textShadow: '1px 1px 3px rgba(0,0,0,0.8)',
-              opacity: 0.85,
-            }}
-          >
-            Made with 💖 for our little princess
-          </p>
-        </section>
-      </div>
-    </div>
+            {/* Details Section */}
+            <DetailsSection ref={detailsSectionRef} />
+
+            {/* Made with Love Section - At the very bottom */}
+            <section className="relative py-8 text-center">
+              <p 
+                className="text-base font-medium"
+                style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  color: '#FFF',
+                  textShadow: '1px 1px 3px rgba(0,0,0,0.8)',
+                  opacity: 0.85,
+                }}
+              >
+                Made with 💖 for our little princess
+              </p>
+            </section>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

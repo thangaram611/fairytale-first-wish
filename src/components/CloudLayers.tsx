@@ -1,3 +1,5 @@
+import { motion, useTransform, useMotionValue } from "framer-motion";
+import { useEffect } from "react";
 import Picture from "@/components/Picture";
 
 // AVIF imports
@@ -15,15 +17,24 @@ interface CloudLayersProps {
 }
 
 const CloudLayers = ({ scrollY }: CloudLayersProps) => {
+  const scrollYMotion = useMotionValue(0);
+
+  useEffect(() => {
+    scrollYMotion.set(scrollY);
+  }, [scrollY, scrollYMotion]);
+
+  // Far clouds move slower (parallax effect) - responsive from start of scroll
+  const layer1Y = useTransform(scrollYMotion, [0, 1000], [0, 50]);    // Slowest - far background
+  const layer2Y = useTransform(scrollYMotion, [0, 1000], [0, 100]);   // Medium-slow
+  const layer3Y = useTransform(scrollYMotion, [0, 1000], [0, 200]);   // Medium-fast
+  const layer5Y = useTransform(scrollYMotion, [0, 1000], [0, 300]);   // Fastest - closest to viewer
+
   return (
     <>
-      {/* Cloud layer 1 - Slow moving, top left */}
-      <div 
+      {/* Cloud layer 1 - Slow moving, top */}
+      <motion.div 
         className="fixed min-h-[100dvh] inset-0 overflow-hidden z-10 pointer-events-none"
-        style={{
-          transform: `translateY(${scrollY * 0.2}px)`,
-          willChange: 'transform',
-        }}
+        style={{ y: layer1Y }}
       >
         <Picture 
           avifSrc={cloudOneAvif}
@@ -46,15 +57,12 @@ const CloudLayers = ({ scrollY }: CloudLayersProps) => {
           className="absolute top-[10%] left-[40%] w-[28%] h-auto object-contain opacity-65"
           style={{ mixBlendMode: 'screen' }}
         />
-      </div>
+      </motion.div>
 
       {/* Cloud layer 2 - Medium speed, middle */}
-      <div 
+      <motion.div 
         className="fixed min-h-[100dvh] inset-0 overflow-hidden z-11 pointer-events-none"
-        style={{
-          transform: `translateY(${scrollY * 0.35}px)`,
-          willChange: 'transform',
-        }}
+        style={{ y: layer2Y }}
       >
         <Picture 
           avifSrc={cloudOneAvif}
@@ -70,29 +78,12 @@ const CloudLayers = ({ scrollY }: CloudLayersProps) => {
           className="absolute top-[25%] right-[5%] w-[35%] h-auto object-contain opacity-75"
           style={{ mixBlendMode: 'screen' }}
         />
-        <Picture 
-          avifSrc={cloudThreeAvif}
-          webpSrc={cloudThreeWebp}
-          alt="" 
-          className="hidden md:block absolute top-[50%] left-[50%] w-[25%] h-auto object-contain opacity-50 -translate-x-1/2"
-          style={{ mixBlendMode: 'screen' }}
-        />
-        <Picture 
-          avifSrc={cloudOneAvif}
-          webpSrc={cloudOneWebp}
-          alt="" 
-          className="hidden md:block absolute top-[45%] right-[20%] w-[30%] h-auto object-contain opacity-70"
-          style={{ mixBlendMode: 'screen' }}
-        />
-      </div>
+      </motion.div>
 
       {/* Cloud layer 3 - Faster, bottom */}
-      <div 
+      <motion.div 
         className="fixed min-h-[100dvh] inset-0 overflow-hidden z-12 pointer-events-none"
-        style={{
-          transform: `translateY(${scrollY * 0.5}px)`,
-          willChange: 'transform',
-        }}
+        style={{ y: layer3Y }}
       >
         <Picture 
           avifSrc={cloudTwoAvif}
@@ -108,53 +99,12 @@ const CloudLayers = ({ scrollY }: CloudLayersProps) => {
           className="absolute top-[70%] right-[12%] w-[32%] h-auto object-contain opacity-70"
           style={{ mixBlendMode: 'screen' }}
         />
-        <Picture 
-          avifSrc={cloudThreeAvif}
-          webpSrc={cloudThreeWebp}
-          alt="" 
-          className="hidden md:block absolute top-[65%] left-[45%] w-[35%] h-auto object-contain opacity-75"
-          style={{ mixBlendMode: 'screen' }}
-        />
-      </div>
-
-      {/* Cloud layer 4 - Very slow, far background - hidden on mobile */}
-      <div 
-        className="hidden md:block fixed min-h-[100dvh] inset-0 overflow-hidden z-13 pointer-events-none"
-        style={{
-          transform: `translateY(${scrollY * 0.15}px)`,
-          willChange: 'transform',
-        }}
-      >
-        <Picture 
-          avifSrc={cloudTwoAvif}
-          webpSrc={cloudTwoWebp}
-          alt="" 
-          className="absolute top-[40%] left-[30%] w-[45%] h-auto object-contain opacity-40"
-          style={{ mixBlendMode: 'screen' }}
-        />
-        <Picture 
-          avifSrc={cloudOneAvif}
-          webpSrc={cloudOneWebp}
-          alt="" 
-          className="absolute top-[55%] right-[25%] w-[40%] h-auto object-contain opacity-45"
-          style={{ mixBlendMode: 'screen' }}
-        />
-        <Picture 
-          avifSrc={cloudThreeAvif}
-          webpSrc={cloudThreeWebp}
-          alt="" 
-          className="absolute top-[48%] left-[60%] w-[42%] h-auto object-contain opacity-42"
-          style={{ mixBlendMode: 'screen' }}
-        />
-      </div>
+      </motion.div>
 
       {/* Cloud layer 5 - In front of castle, slow parallax */}
-      <div 
+      <motion.div 
         className="fixed min-h-[100dvh] inset-0 overflow-hidden z-25 pointer-events-none"
-        style={{
-          transform: `translateY(${scrollY * 0.4}px)`,
-          willChange: 'transform',
-        }}
+        style={{ y: layer5Y }}
       >
         <Picture 
           avifSrc={cloudOneAvif}
@@ -170,7 +120,7 @@ const CloudLayers = ({ scrollY }: CloudLayersProps) => {
           className="absolute top-[55%] right-[8%] w-[42%] h-auto object-contain opacity-80"
           style={{ mixBlendMode: 'screen' }}
         />
-      </div>
+      </motion.div>
     </>
   );
 };

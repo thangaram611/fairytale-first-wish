@@ -1,168 +1,229 @@
-import { useState, useEffect, useRef, forwardRef } from "react";
+import { useRef, forwardRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { MapPin, Calendar, Clock } from "lucide-react";
 import { invitationDetails } from "@/config/metadata";
 
 const DetailsSection = forwardRef<HTMLDivElement>((props, ref) => {
-  const [isClosingVisible, setIsClosingVisible] = useState(false);
-  const closingTextRef = useRef<HTMLParagraphElement>(null);
+  const closingTextRef = useRef<HTMLDivElement>(null);
+  const isClosingInView = useInView(closingTextRef, { once: false, amount: 0.5 });
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsClosingVisible(entry.isIntersecting);
-      },
-      { threshold: 0.5 }
-    );
-
-    const currentRef = closingTextRef.current;
-    if (currentRef) {
-      observer.observe(currentRef);
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.6 }
     }
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
-  }, []);
+  };
 
   return (
     <section ref={ref} className="min-h-[100dvh] flex items-center justify-center px-4 py-5">
       <div className="max-w-4xl w-full space-y-16">
         {/* When Card */}
-        <div className="bg-white/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl border-3 sm:border-4 border-yellow-400 animate-fade-in">
-          <h2 
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-6 sm:mb-8"
+        <motion.div 
+          className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border-4 border-yellow-400"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.3 }}
+          variants={cardVariants}
+        >
+          <motion.h2 
+            className="text-4xl font-bold text-center mb-8"
             style={{
               fontFamily: "'Cinzel Decorative', serif",
               color: '#D4AF37',
               textShadow: '2px 2px 4px rgba(0,0,0,0.2)',
             }}
+            initial={{ scale: 0.8, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: false }}
+            transition={{ delay: 0.2, duration: 0.5 }}
           >
             When
-          </h2>
-          <div className="space-y-4 sm:space-y-6">
-            <div className="flex items-center justify-center gap-3 sm:gap-4">
-              <Calendar className="w-6 h-6 sm:w-8 sm:h-8 text-pink-600 flex-shrink-0" />
-              <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-800">
+          </motion.h2>
+          <div className="space-y-6">
+            <motion.div 
+              className="flex items-center justify-center gap-4"
+              initial={{ x: -50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: false }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+            >
+              <Calendar className="w-8 h-8 text-pink-600 flex-shrink-0" />
+              <span className="text-2xl font-semibold text-gray-800">
                 {invitationDetails.date}
               </span>
-            </div>
-            <div className="flex items-center justify-center gap-3 sm:gap-4">
-              <Clock className="w-6 h-6 sm:w-8 sm:h-8 text-pink-600 flex-shrink-0" />
-              <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-gray-700">
+            </motion.div>
+            <motion.div 
+              className="flex items-center justify-center gap-4"
+              initial={{ x: 50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: false }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+            >
+              <Clock className="w-8 h-8 text-pink-600 flex-shrink-0" />
+              <span className="text-xl font-semibold text-gray-700">
                 {invitationDetails.time}
               </span>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Where Card */}
-        <div className="bg-white/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl border-3 sm:border-4 border-yellow-400 animate-fade-in">
-          <h2 
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-6 sm:mb-8"
+        <motion.div 
+          className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border-4 border-yellow-400"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.3 }}
+          variants={cardVariants}
+        >
+          <motion.h2 
+            className="text-4xl font-bold text-center mb-8"
             style={{
               fontFamily: "'Cinzel Decorative', serif",
               color: '#D4AF37',
               textShadow: '2px 2px 4px rgba(0,0,0,0.2)',
             }}
+            initial={{ scale: 0.8, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: false }}
+            transition={{ delay: 0.2, duration: 0.5 }}
           >
             Where
-          </h2>
-          <div className="flex flex-col items-center gap-3 sm:gap-4">
-            <MapPin className="w-8 h-8 sm:w-10 sm:h-10 text-pink-600 flex-shrink-0" />
+          </motion.h2>
+          <motion.div 
+            className="flex flex-col items-center gap-4"
+            initial={{ y: 30, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: false }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
+            <MapPin className="w-10 h-10 text-pink-600 flex-shrink-0" />
             <a 
               href={`https://maps.google.com/?q=${encodeURIComponent(invitationDetails.venue)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center leading-relaxed text-gray-800 font-medium hover:text-pink-600 transition-colors duration-200 cursor-pointer underline decoration-pink-400 decoration-2 hover:decoration-pink-600 px-2"
+              className="text-xl text-center leading-relaxed text-gray-800 font-medium hover:text-pink-600 transition-colors duration-200 cursor-pointer underline decoration-pink-400 decoration-2 hover:decoration-pink-600 px-2"
             >
               {invitationDetails.venue}
             </a>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Dress Code Card */}
-        <div className="bg-gradient-to-br from-pink-50 via-purple-50 to-pink-50 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl border-3 sm:border-4 border-purple-300 animate-fade-in">
-          <h2 
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-6 sm:mb-8"
+        <motion.div 
+          className="bg-gradient-to-br from-pink-50 via-purple-50 to-pink-50 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border-4 border-purple-300"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.3 }}
+          variants={cardVariants}
+        >
+          <motion.h2 
+            className="text-4xl font-bold text-center mb-8"
             style={{
               fontFamily: "'Cinzel Decorative', serif",
               color: '#D4AF37',
               textShadow: '2px 2px 4px rgba(0,0,0,0.2)',
             }}
+            initial={{ scale: 0.8, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: false }}
+            transition={{ delay: 0.2, duration: 0.5 }}
           >
             Royal Dress Code
-          </h2>
+          </motion.h2>
           <div className="space-y-6">
-            <p 
-              className="text-xl sm:text-2xl md:text-3xl text-center font-medium italic"
+            <motion.p 
+              className="text-2xl text-center font-medium italic"
               style={{
                 fontFamily: "'Cormorant Garamond', serif",
                 color: '#6B4A8C',
               }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: false }}
+              transition={{ delay: 0.3, duration: 0.5 }}
             >
               Join us in our enchanted kingdom dressed in...
-            </p>
-            <div className="flex items-center justify-center gap-4 sm:gap-6 flex-wrap">
-              <div className="flex items-center gap-2 sm:gap-3 bg-pink-200/60 px-4 sm:px-6 py-3 sm:py-4 rounded-full border-2 border-pink-300 shadow-lg">
-                <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-pink-300 border-2 border-pink-400 shadow-inner"></div>
-                <span className="text-lg sm:text-xl md:text-2xl font-semibold" style={{ color: '#E91E8C' }}>
+            </motion.p>
+            <motion.div 
+              className="flex items-center justify-center gap-3 sm:gap-6"
+              initial={{ scale: 0.8, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: false }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+            >
+              <div className="flex items-center gap-2 sm:gap-3 bg-pink-200/60 px-3 sm:px-6 py-3 sm:py-4 rounded-full border-2 border-pink-300 shadow-lg">
+                <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-pink-300 border-2 border-pink-400 shadow-inner flex-shrink-0"></div>
+                <span className="text-base sm:text-xl font-semibold whitespace-nowrap" style={{ color: '#E91E8C' }}>
                   Light Pink
                 </span>
               </div>
-              <span className="text-2xl sm:text-3xl md:text-4xl font-bold" style={{ color: '#D4AF37' }}>
+              <span className="text-2xl sm:text-3xl font-bold flex-shrink-0" style={{ color: '#D4AF37' }}>
                 or
               </span>
-              <div className="flex items-center gap-2 sm:gap-3 bg-purple-200/60 px-4 sm:px-6 py-3 sm:py-4 rounded-full border-2 border-purple-300 shadow-lg">
-                <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-purple-300 border-2 border-purple-400 shadow-inner"></div>
-                <span className="text-lg sm:text-xl md:text-2xl font-semibold" style={{ color: '#8B4789' }}>
+              <div className="flex items-center gap-2 sm:gap-3 bg-purple-200/60 px-3 sm:px-6 py-3 sm:py-4 rounded-full border-2 border-purple-300 shadow-lg">
+                <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-purple-300 border-2 border-purple-400 shadow-inner flex-shrink-0"></div>
+                <span className="text-base sm:text-xl font-semibold whitespace-nowrap" style={{ color: '#8B4789' }}>
                   Lilac
                 </span>
               </div>
-            </div>
-            <p 
-              className="text-lg sm:text-xl md:text-2xl text-center font-medium"
+            </motion.div>
+            <motion.p 
+              className="text-xl text-center font-medium"
               style={{
                 fontFamily: "'Cormorant Garamond', serif",
                 color: '#6B4A8C',
               }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: false }}
+              transition={{ delay: 0.5, duration: 0.5 }}
             >
               ✨ Party wear attire to match our magical celebration ✨
-            </p>
+            </motion.p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Closing Message */}
-        <div className="text-center py-8 sm:py-12 px-2">
-          <h2 
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4"
+        <div ref={closingTextRef} className="text-center py-12 px-2">
+          <motion.h2 
+            className="text-3xl font-bold mb-4"
             style={{
               fontFamily: "'Cinzel Decorative', serif",
               color: '#FFD700',
               textShadow: '3px 3px 6px rgba(0,0,0,0.7), 0 0 30px rgba(255,215,0,0.4)',
             }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.6 }}
           >
             ...and they celebrated happily ever after
-          </h2>
-          <p 
-            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold"
+          </motion.h2>
+          <motion.p 
+            className="text-2xl font-semibold"
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               color: '#FFF',
               textShadow: '2px 2px 4px rgba(0,0,0,0.7)',
             }}
+            initial={{ opacity: 0 }}
+            animate={{ 
+              opacity: 1,
+              scale: isClosingInView ? [1, 1.05, 1] : 1
+            }}
+            transition={{ 
+              opacity: { duration: 0.6, delay: 0.3 },
+              scale: { 
+                duration: 3,
+                repeat: isClosingInView ? Infinity : 0,
+                ease: "easeInOut"
+              }
+            }}
           >
-            <span 
-              ref={closingTextRef}
-              className="inline-block transition-transform duration-1000 ease-in-out"
-              style={{
-                animation: isClosingVisible ? 'breathe 3s ease-in-out infinite' : 'none',
-              }}
-            >
-              👑✨ We can't wait to see you there! 👑✨
-            </span>
-          </p>
+            ✨ We can't wait to see you there! ✨
+          </motion.p>
         </div>
       </div>
     </section>

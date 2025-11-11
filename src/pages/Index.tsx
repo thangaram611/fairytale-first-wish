@@ -100,12 +100,12 @@ const Index = () => {
       </AnimatePresence>
 
       {!isLoading && (
-        <div className="relative overflow-x-hidden" style={{ touchAction: 'pan-y' }}>
+        <div className="relative overflow-x-hidden min-h-screen min-h-[100dvh]" style={{ touchAction: 'pan-y' }}>
           {/* Confetti Effects */}
           <ConfettiEffect />
 
           {/* Base gradient background - baby pink to lilac - z-index: 0 */}
-          <div className="fixed inset-0 bg-gradient-to-b from-pink-100 via-pink-200 to-purple-200 z-0" />
+          <div className="absolute inset-0 min-h-screen min-h-[100dvh] bg-gradient-to-b from-pink-100 via-pink-200 to-purple-200 z-0" />
           
           {/* Cloud layers with parallax effect */}
           <CloudLayers scrollY={scrollY} />
@@ -114,7 +114,7 @@ const Index = () => {
           <CastleLayer scrollY={scrollY} />
           
           {/* Gradient overlay for depth - z-index: 30 */}
-          <div className="fixed inset-0 bg-gradient-to-b from-transparent via-purple-300/40 to-purple-500/80 pointer-events-none z-30" />
+          <div className="absolute inset-0 min-h-screen min-h-[100dvh] bg-gradient-to-b from-transparent via-purple-300/40 to-purple-500/80 pointer-events-none z-30" />
           
           {/* Content - z-index: 40 */}
           <div className="relative z-40">

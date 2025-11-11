@@ -34,7 +34,11 @@ const CloudLayers = ({ scrollY }: CloudLayersProps) => {
       {/* Cloud layer 1 - Slow moving, top */}
       <motion.div 
         className="fixed min-h-[100dvh] inset-0 overflow-hidden z-10 pointer-events-none"
-        style={{ y: layer1Y }}
+        style={{ 
+          y: layer1Y,
+          willChange: 'transform',
+          transform: 'translate3d(0, 0, 0)',
+        }}
       >
         <Picture 
           avifSrc={cloudOneAvif}
@@ -62,7 +66,11 @@ const CloudLayers = ({ scrollY }: CloudLayersProps) => {
       {/* Cloud layer 2 - Medium speed, middle */}
       <motion.div 
         className="fixed min-h-[100dvh] inset-0 overflow-hidden z-11 pointer-events-none"
-        style={{ y: layer2Y }}
+        style={{ 
+          y: layer2Y,
+          willChange: 'transform',
+          transform: 'translate3d(0, 0, 0)',
+        }}
       >
         <Picture 
           avifSrc={cloudOneAvif}
@@ -83,7 +91,11 @@ const CloudLayers = ({ scrollY }: CloudLayersProps) => {
       {/* Cloud layer 3 - Faster, bottom */}
       <motion.div 
         className="fixed min-h-[100dvh] inset-0 overflow-hidden z-12 pointer-events-none"
-        style={{ y: layer3Y }}
+        style={{ 
+          y: layer3Y,
+          willChange: 'transform',
+          transform: 'translate3d(0, 0, 0)',
+        }}
       >
         <Picture 
           avifSrc={cloudTwoAvif}
@@ -104,7 +116,11 @@ const CloudLayers = ({ scrollY }: CloudLayersProps) => {
       {/* Cloud layer 5 - In front of castle, slow parallax */}
       <motion.div 
         className="fixed min-h-[100dvh] inset-0 overflow-hidden z-25 pointer-events-none"
-        style={{ y: layer5Y }}
+        style={{ 
+          y: layer5Y,
+          willChange: 'transform',
+          transform: 'translate3d(0, 0, 0)',
+        }}
       >
         <Picture 
           avifSrc={cloudOneAvif}

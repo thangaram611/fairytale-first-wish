@@ -82,6 +82,57 @@ const DetailsSection = forwardRef<HTMLDivElement>((props, ref) => {
           </div>
         </div>
 
+        {/* Dress Code Card */}
+        <div className="bg-gradient-to-br from-pink-50 via-purple-50 to-pink-50 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl border-3 sm:border-4 border-purple-300 animate-fade-in">
+          <h2 
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-6 sm:mb-8"
+            style={{
+              fontFamily: "'Cinzel Decorative', serif",
+              color: '#D4AF37',
+              textShadow: '2px 2px 4px rgba(0,0,0,0.2)',
+            }}
+          >
+            Royal Dress Code
+          </h2>
+          <div className="space-y-6">
+            <p 
+              className="text-xl sm:text-2xl md:text-3xl text-center font-medium italic"
+              style={{
+                fontFamily: "'Cormorant Garamond', serif",
+                color: '#6B4A8C',
+              }}
+            >
+              Join us in our enchanted kingdom dressed in...
+            </p>
+            <div className="flex items-center justify-center gap-4 sm:gap-6 flex-wrap">
+              <div className="flex items-center gap-2 sm:gap-3 bg-pink-200/60 px-4 sm:px-6 py-3 sm:py-4 rounded-full border-2 border-pink-300 shadow-lg">
+                <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-pink-300 border-2 border-pink-400 shadow-inner"></div>
+                <span className="text-lg sm:text-xl md:text-2xl font-semibold" style={{ color: '#E91E8C' }}>
+                  Light Pink
+                </span>
+              </div>
+              <span className="text-2xl sm:text-3xl md:text-4xl font-bold" style={{ color: '#D4AF37' }}>
+                or
+              </span>
+              <div className="flex items-center gap-2 sm:gap-3 bg-purple-200/60 px-4 sm:px-6 py-3 sm:py-4 rounded-full border-2 border-purple-300 shadow-lg">
+                <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-purple-300 border-2 border-purple-400 shadow-inner"></div>
+                <span className="text-lg sm:text-xl md:text-2xl font-semibold" style={{ color: '#8B4789' }}>
+                  Lilac
+                </span>
+              </div>
+            </div>
+            <p 
+              className="text-lg sm:text-xl md:text-2xl text-center font-medium"
+              style={{
+                fontFamily: "'Cormorant Garamond', serif",
+                color: '#6B4A8C',
+              }}
+            >
+              ✨ Party wear attire to match our magical celebration ✨
+            </p>
+          </div>
+        </div>
+
         {/* Closing Message */}
         <div className="text-center py-8 sm:py-12 px-2">
           <h2 

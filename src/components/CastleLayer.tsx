@@ -35,13 +35,13 @@ const CastleLayer = ({ scrollY }: CastleLayerProps) => {
     // Mobile: Reduced initial position and faster parallax for quicker reveal
     initialTranslateY_vh = 50; 
     translateSpeed = 2.2;
-    scaleMultiplier = 0.002;
+    scaleMultiplier = 0.0012;
     baseScale = 1.15;
   } else if (windowWidth <= 1024) {
     // Tablet: Moderate adjustments
-    initialTranslateY_vh = 55;
+    initialTranslateY_vh = 50;
     translateSpeed = 1.6;
-    scaleMultiplier = 0.0012;
+    scaleMultiplier = 0.001;
     baseScale = 1.0;
   } else {
     // Desktop: Keep original smooth experience
@@ -61,7 +61,7 @@ const CastleLayer = ({ scrollY }: CastleLayerProps) => {
   const scale = baseScale + scrollPastStopPoint * scaleMultiplier;
 
   const castleParallaxStyle = {
-    bottom: windowWidth <= 768 ? '-30dvh' : windowWidth <= 1024 ? '-15dvh' : '0dvh',
+    bottom: windowWidth <= 768 ? '-40dvh' : windowWidth <= 1024 ? '-20dvh' : '0dvh',
     transform: `translateY(${translateY_vh}vh) scale(${scale})`,
     willChange: 'transform',
   };

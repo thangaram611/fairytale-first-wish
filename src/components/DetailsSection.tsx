@@ -5,7 +5,7 @@ import { invitationDetails } from "@/config/metadata";
 
 const DetailsSection = forwardRef<HTMLDivElement>((props, ref) => {
   const closingTextRef = useRef<HTMLDivElement>(null);
-  const isClosingInView = useInView(closingTextRef, { once: false, amount: 0.5 });
+  const isClosingInView = useInView(closingTextRef, { once: true, amount: 0.3 });
 
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -24,7 +24,7 @@ const DetailsSection = forwardRef<HTMLDivElement>((props, ref) => {
           className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border-4 border-yellow-400"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.2 }}
           variants={cardVariants}
         >
           <motion.h2 
@@ -36,8 +36,8 @@ const DetailsSection = forwardRef<HTMLDivElement>((props, ref) => {
             }}
             initial={{ scale: 0.8, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: false }}
-            transition={{ delay: 0.2, duration: 0.5 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
           >
             When
           </motion.h2>
@@ -46,8 +46,8 @@ const DetailsSection = forwardRef<HTMLDivElement>((props, ref) => {
               className="flex items-center justify-center gap-4"
               initial={{ x: -50, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: false }}
-              transition={{ delay: 0.3, duration: 0.5 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
             >
               <Calendar className="w-8 h-8 text-pink-600 flex-shrink-0" />
               <span className="text-2xl font-semibold text-gray-800">
@@ -58,8 +58,8 @@ const DetailsSection = forwardRef<HTMLDivElement>((props, ref) => {
               className="flex items-center justify-center gap-4"
               initial={{ x: 50, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: false }}
-              transition={{ delay: 0.4, duration: 0.5 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.5, ease: "easeOut" }}
             >
               <Clock className="w-8 h-8 text-pink-600 flex-shrink-0" />
               <span className="text-xl font-semibold text-gray-700">
@@ -74,7 +74,7 @@ const DetailsSection = forwardRef<HTMLDivElement>((props, ref) => {
           className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border-4 border-yellow-400"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.2 }}
           variants={cardVariants}
         >
           <motion.h2 
@@ -86,8 +86,8 @@ const DetailsSection = forwardRef<HTMLDivElement>((props, ref) => {
             }}
             initial={{ scale: 0.8, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: false }}
-            transition={{ delay: 0.2, duration: 0.5 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
           >
             Where
           </motion.h2>
@@ -95,8 +95,8 @@ const DetailsSection = forwardRef<HTMLDivElement>((props, ref) => {
             className="flex flex-col items-center gap-4"
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: false }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
           >
             <MapPin className="w-10 h-10 text-pink-600 flex-shrink-0" />
             <a 
@@ -115,7 +115,7 @@ const DetailsSection = forwardRef<HTMLDivElement>((props, ref) => {
           className="bg-gradient-to-br from-pink-50 via-purple-50 to-pink-50 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border-4 border-purple-300"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.2 }}
           variants={cardVariants}
         >
           <motion.h2 
@@ -127,8 +127,8 @@ const DetailsSection = forwardRef<HTMLDivElement>((props, ref) => {
             }}
             initial={{ scale: 0.8, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: false }}
-            transition={{ delay: 0.2, duration: 0.5 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
           >
             Royal Dress Code
           </motion.h2>
@@ -141,8 +141,8 @@ const DetailsSection = forwardRef<HTMLDivElement>((props, ref) => {
               }}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              viewport={{ once: false }}
-              transition={{ delay: 0.3, duration: 0.5 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
             >
               Join us in our enchanted kingdom dressed in...
             </motion.p>
@@ -150,8 +150,8 @@ const DetailsSection = forwardRef<HTMLDivElement>((props, ref) => {
               className="flex items-center justify-center gap-3 sm:gap-6"
               initial={{ scale: 0.8, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: false }}
-              transition={{ delay: 0.4, duration: 0.5 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.5, ease: "easeOut" }}
             >
               <div className="flex items-center gap-2 sm:gap-3 bg-pink-200/60 px-3 sm:px-6 py-3 sm:py-4 rounded-full border-2 border-pink-300 shadow-lg">
                 <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-pink-300 border-2 border-pink-400 shadow-inner flex-shrink-0"></div>
@@ -177,8 +177,8 @@ const DetailsSection = forwardRef<HTMLDivElement>((props, ref) => {
               }}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              viewport={{ once: false }}
-              transition={{ delay: 0.5, duration: 0.5 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, duration: 0.5, ease: "easeOut" }}
             >
               ✨ Party wear attire to match our magical celebration ✨
             </motion.p>
@@ -196,8 +196,8 @@ const DetailsSection = forwardRef<HTMLDivElement>((props, ref) => {
             }}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
             ...and they celebrated happily ever after
           </motion.h2>

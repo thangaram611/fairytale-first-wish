@@ -10,7 +10,7 @@ function injectMetaTags(): Plugin {
     name: "inject-meta-tags",
     transformIndexHtml(html) {
       // Get the base URL for production (can be configured)
-      const baseUrl = process.env.VITE_BASE_URL || "https://taneira1.onslate.in";
+      const baseUrl = process.env.VITE_BASE_URL || "https://taneirainvites.onslate.in";
       const ogImageUrl = `${baseUrl}/og-image.jpg`;
       
       return html
@@ -46,7 +46,18 @@ export default defineConfig(() => ({
         enabled: true,
         type: 'module'
       },
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'robots.txt', 'og-image.jpg'],
+      includeAssets: [
+        'favicon.ico',
+        'favicon-96x96.png',
+        'favicon.svg',
+        'apple-touch-icon.png',
+        'og-image.jpg',
+        'placeholder.svg',
+        'robots.txt',
+        'site.webmanifest',
+        'web-app-manifest-192x192.png',
+        'web-app-manifest-512x512.png'
+      ],
       manifest: {
         name: 'Princess Taneira 1st Birthday Invitation',
         short_name: 'Taneira Party',
@@ -59,13 +70,13 @@ export default defineConfig(() => ({
         scope: '/',
         icons: [
           {
-            src: '/android-chrome-192x192.png',
+            src: '/web-app-manifest-192x192.png',
             sizes: '192x192',
             type: 'image/png',
             purpose: 'any maskable'
           },
           {
-            src: '/android-chrome-512x512.png',
+            src: '/web-app-manifest-512x512.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable'
